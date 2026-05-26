@@ -66,7 +66,18 @@ def main():
     args = ap.parse_args()
 
     pdf_dir = Path(args.pdf_dir)
-    pdfs = sorted(pdf_dir.glob("*.pdf"))
+    # Some files in the source archives are real PDFs but lack the .pdf
+    # extension — detect by magic bytes rather than extension.
+    pdfs = []
+    for p in sorted(pdf_dir.iterdir()):
+        if not p.is_file():
+            continue
+        try:
+            with open(p, "rb") as fh:
+                if fh.read(4) == b"%PDF":
+                    pdfs.append(p)
+        except OSError:
+            continue
     if args.limit:
         pdfs = pdfs[: args.limit]
 

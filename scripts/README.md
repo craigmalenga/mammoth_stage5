@@ -79,9 +79,11 @@ Takes ~30 seconds for the full 1284 on this container.
 
 ## Last run result (2026-05-26)
 
-- **1281 PDFs** processed (rar archives contained 1281, not 1284 as initially
-  estimated by the user).
-- **1280 fully clean** rows.
+- **1284 PDFs** processed. The archives contain 1281 files with a `.pdf`
+  extension plus **3 PDFs that have no extension at all** (`Ashley Mitchell`,
+  `Daniel Sigley `, `Sharon McAleer`). The script detects PDFs by magic bytes
+  (`%PDF`) instead of file extension so all 1284 are picked up.
+- **1283 fully clean** rows.
 - **1 partial**: `Simon Scott - 223600570` — agent left "# unsatisfied CCJs"
   blank in the source PDF. The other 5 fields extracted correctly; the
   unsatisfied cell is `None` in the output. Logged in the `Errors` sheet.
